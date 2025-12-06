@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 const items = [
   { label: 'What we do', href: '/what-we-do' }, // Make sure you have a folder for this
   { label: 'Work', href: '/work' },             // Make sure you have a folder for this
-  { label: 'About us', href: '/about' },        // Make sure you have a folder for this
+  { label: 'About us', href: '/about-us' },        // Make sure you have a folder for this
   { label: 'Our solution', href: '/our-solution' } // ✅ FIXED: Points to your new page
 ]
 
