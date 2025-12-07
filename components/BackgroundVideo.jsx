@@ -1,15 +1,24 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 
 export default function BackgroundVideo() {
+  const pathname = usePathname()
   const [ready, setReady] = useState(false)
+
   useEffect(() => {
     const handler = () => setReady(true)
     if (typeof window !== 'undefined' && window.__introDone) setReady(true)
     window.addEventListener('intro:done', handler)
     return () => window.removeEventListener('intro:done', handler)
   }, [])
+
+  // Only show video on homepage
+  if (pathname !== '/') {
+    return null
+  }
+
   return (
     <motion.video
       src="/hero_bg_video.mp4"
