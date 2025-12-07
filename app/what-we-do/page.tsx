@@ -1,4 +1,5 @@
 import WhatWeDo from "../../components/WhatWeDo"
+import Navbar from "../../components/Navbar"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -10,8 +11,8 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="bg-black">
+      <Navbar />
       <WhatWeDo />
     </div>
   )
 }
-

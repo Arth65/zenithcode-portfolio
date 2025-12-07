@@ -1,0 +1,166 @@
+.chroma-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.chroma-grid {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(var(--cols, 3), 380px);
+    grid-auto-rows: auto;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+/* Grayscale layer - base */
+.chroma-grid-grayscale {
+    position: relative;
+    z-index: 1;
+}
+
+.chroma-grid-grayscale .chroma-card {
+    filter: grayscale(1) brightness(0.8);
+}
+
+/* Colored layer - on top with radial gradient mask for smooth feathering */
+.chroma-grid-colored {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+
+    /* Radial gradient mask creates smooth feathered edge */
+    -webkit-mask-image: radial-gradient(circle var(--radius) at var(--mouse-x) var(--mouse-y),
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 1) 20%,
+            rgba(0, 0, 0, 0.9) 35%,
+            rgba(0, 0, 0, 0.7) 50%,
+            rgba(0, 0, 0, 0.4) 70%,
+            rgba(0, 0, 0, 0.1) 85%,
+            rgba(0, 0, 0, 0) 100%);
+    mask-image: radial-gradient(circle var(--radius) at var(--mouse-x) var(--mouse-y),
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 1) 20%,
+            rgba(0, 0, 0, 0.9) 35%,
+            rgba(0, 0, 0, 0.7) 50%,
+            rgba(0, 0, 0, 0.4) 70%,
+            rgba(0, 0, 0, 0.1) 85%,
+            rgba(0, 0, 0, 0) 100%);
+}
+
+.chroma-grid-colored .chroma-card {
+    filter: none;
+    pointer-events: none;
+}
+
+@media (max-width: 1250px) {
+    .chroma-grid {
+        grid-template-columns: repeat(auto-fit, minmax(340px, 380px));
+        gap: 0.75rem;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chroma-grid {
+        grid-template-columns: 320px;
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+}
+
+.chroma-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    height: auto;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: border-color 0.3s ease;
+    background: var(--card-gradient);
+
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    --spotlight-color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 480px) {
+    .chroma-card {
+        width: 320px;
+    }
+}
+
+.chroma-grid-grayscale .chroma-card:hover {
+    border-color: var(--card-border);
+}
+
+.chroma-img-wrapper {
+    position: relative;
+    z-index: 1;
+    /* flex: 1 removed to prevent wrapper from growing and pushing text down */
+    padding: 12px;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+.chroma-img-wrapper img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+}
+
+.chroma-info {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    /* info section takes available space */
+    padding: 1.25rem;
+    color: #fff;
+    font-family: var(--font-manrope), system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.chroma-header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    row-gap: 0.25rem;
+    column-gap: 0.75rem;
+    width: 100%;
+}
+
+.chroma-info .name {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.chroma-info .role,
+.chroma-info .handle {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.chroma-info .description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #e2e2e2;
+    font-weight: 300;
+    margin: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0.75rem;
+}

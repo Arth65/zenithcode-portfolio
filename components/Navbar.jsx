@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const items = [
@@ -13,6 +14,13 @@ const items = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [ready, setReady] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [atTop, setAtTop] = useState(true)
+  const lastY = useRef(0)
+  const pathname = usePathname()
+  const solid = pathname === '/' ? false : !atTop
+  const [revealHide, setRevealHide] = useState(false)
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') setOpen(false)
@@ -26,19 +34,58 @@ export default function Navbar() {
     window.addEventListener('intro:done', handler)
     return () => window.removeEventListener('intro:done', handler)
   }, [])
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY || 0
+      setScrolled(y > 4)
+      setAtTop(y <= 4)
+      if (open) { setHidden(false); lastY.current = y; return }
+      if (y > lastY.current + 8 && y > 40) setHidden(true)
+      else if (y < lastY.current - 6 || y <= 40) setHidden(false)
+      lastY.current = y
+    }
+    if (typeof window !== 'undefined' && window.__lenis && window.__lenis.on) {
+      window.__lenis.on('scroll', onScroll)
+      return () => { if (window.__lenis && window.__lenis.off) window.__lenis.off('scroll', onScroll) }
+    } else {
+      window.addEventListener('scroll', onScroll, { passive: true })
+      return () => window.removeEventListener('scroll', onScroll)
+    }
+  }, [open])
+  useEffect(() => {
+    const onReveal = (e) => {
+      const val = typeof e.detail === 'boolean' ? e.detail : (window.__wwdReveal || false)
+      if (pathname === '/what-we-do') setRevealHide(!!val)
+      else setRevealHide(false)
+    }
+    window.addEventListener('wwd:reveal', onReveal)
+    return () => window.removeEventListener('wwd:reveal', onReveal)
+  }, [pathname])
   return (
-    <motion.header initial={{ opacity: 0, y: -6 }} animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="fixed inset-x-0 top-0 z-20 bg-transparent">
+    <motion.header
+      initial={{ opacity: 0, y: -6 }}
+      animate={ready ? (revealHide ? { opacity: 0, y: -100 } : hidden ? { opacity: 1, y: -100 } : { opacity: 1, y: 0 }) : { opacity: 0, y: -6 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed inset-x-0 top-0 z-20 ${solid ? 'bg-black' : 'bg-transparent'}`}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-10 py-5">
         <Link href="/" className="text-white/90 font-semibold tracking-tight">ZenithCode</Link>
         <nav className="hidden md:flex items-center gap-10">
           {items.map((i) => (
-            <Link key={i.label} href={i.href} className="text-white/70 hover:text-white transition-colors text-sm">
+            <Link
+              key={i.label}
+              href={i.href}
+              onClick={() => {
+                window.dispatchEvent(new Event('nav:loader'))
+              }}
+              className="text-white/70 hover:text-white transition-colors text-[16px]"
+            >
               {i.label}
             </Link>
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <Link href="#contact" className="hidden md:inline-flex rounded-full bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-sm hover:bg-white/20 transition-colors">Get in touch</Link>
+          <Link href="#contact" onClick={() => window.dispatchEvent(new Event('nav:loader'))} className="hidden md:inline-flex rounded-full bg-white/10 px-4 py-2 text-[16px] text-white/90 backdrop-blur-sm hover:bg-white/20 transition-colors">Get in touch</Link>
           <button
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -52,6 +99,12 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: solid && scrolled ? 1 : 0 }}
+        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/10"
+      />
       {open && (
         <div className="md:hidden fixed inset-0 z-30 bg-black/80 backdrop-blur-sm" onClick={() => setOpen(false)}>
           <button
@@ -69,13 +122,16 @@ export default function Navbar() {
                 <Link
                   key={i.label}
                   href={i.href}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    window.dispatchEvent(new Event('nav:loader'))
+                    setOpen(false)
+                  }}
                   className="text-white/90 text-lg"
                 >
                   {i.label}
                 </Link>
               ))}
-              <Link href="#contact" onClick={() => setOpen(false)} className="rounded-full bg-white/10 px-4 py-2 text-white/90">Get in touch</Link>
+              <Link href="#contact" onClick={() => { window.dispatchEvent(new Event('nav:loader')); setOpen(false) }} className="rounded-full bg-white/10 px-4 py-2 text-white/90">Get in touch</Link>
             </div>
           </div>
         </div>
