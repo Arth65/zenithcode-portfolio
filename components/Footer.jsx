@@ -14,7 +14,7 @@ export default function Footer() {
                 muted
                 playsInline
             >
-                <source src="/hero_bg_video.mp4" type="video/mp4" />
+                <source src="/landing_bg_video_1.mp4" type="video/mp4" />
             </video>
 
             {/* Overlay content */}

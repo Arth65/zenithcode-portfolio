@@ -3,33 +3,50 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+// Register ScrollTrigger
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 // Define your navigation links here
-// We changed '#' to '/' so they go to the actual pages you are building
 const items = [
-  { label: 'What we do', href: '/what-we-do' }, // Make sure you have a folder for this
-  { label: 'Work', href: '/work' },             // Make sure you have a folder for this
-  { label: 'About us', href: '/about-us' },        // Make sure you have a folder for this
-  { label: 'Our solution', href: '/our-solution' } // ✅ FIXED: Points to your new page
+  { label: 'What We Do', href: '/what-we-do' },
+  { label: 'About us', href: '/about-us' },
+  { label: 'Our solution', href: '/our-solution' }
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [ready, setReady] = useState(false)
-  const [hidden, setHidden] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [atTop, setAtTop] = useState(true)
-  const lastY = useRef(0)
+  const [videoMode, setVideoMode] = useState(false) // New state for Logo vs Tagline
   const pathname = usePathname()
-  const solid = pathname === '/' ? false : !atTop
-  const [revealHide, setRevealHide] = useState(false)
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape') setOpen(false)
+
+  // Use GSAP for Scroll ScrollTrigger - trigger when video is fully visible
+  useGSAP(() => {
+    // If not on home page, always show logo (videoMode = true)
+    if (pathname !== '/') {
+      setVideoMode(true)
+      return
     }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
+
+    // On home page, start with tagline (videoMode = false) unless scrolled
+    setVideoMode(false)
+
+    const trigger = ScrollTrigger.create({
+      // Trigger after the hero animation completes (200vh scroll distance)
+      start: () => `top -${window.innerHeight * 1.8}px`, // ~180vh scroll
+      onEnter: () => setVideoMode(true),
+      onLeaveBack: () => setVideoMode(false),
+      // markers: true 
+    })
+
+    return () => trigger.kill()
+  }, [pathname])
+
 
   // Handle Intro Animation timing
   useEffect(() => {
@@ -38,57 +55,43 @@ export default function Navbar() {
     window.addEventListener('intro:done', handler)
     return () => window.removeEventListener('intro:done', handler)
   }, [])
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY || 0
-      setScrolled(y > 4)
-      setAtTop(y <= 4)
-      if (open) { setHidden(false); lastY.current = y; return }
-      if (y > lastY.current + 8 && y > 40) setHidden(true)
-      else if (y < lastY.current - 6 || y <= 40) setHidden(false)
-      lastY.current = y
-    }
-    if (typeof window !== 'undefined' && window.__lenis && window.__lenis.on) {
-      window.__lenis.on('scroll', onScroll)
-      return () => { if (window.__lenis && window.__lenis.off) window.__lenis.off('scroll', onScroll) }
-    } else {
-      window.addEventListener('scroll', onScroll, { passive: true })
-      return () => window.removeEventListener('scroll', onScroll)
-    }
-  }, [open])
-  useEffect(() => {
-    const onReveal = (e) => {
-      const val = typeof e.detail === 'boolean' ? e.detail : (window.__wwdReveal || false)
-      if (pathname === '/what-we-do') setRevealHide(!!val)
-      else setRevealHide(false)
-    }
-    window.addEventListener('wwd:reveal', onReveal)
-    return () => window.removeEventListener('wwd:reveal', onReveal)
-  }, [pathname])
+
+  // Keep existing reveal/hide logic for specific pages if needed, but simplify for this request
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -6 }}
-      animate={ready ? (revealHide ? { opacity: 0, y: -100 } : hidden ? { opacity: 1, y: -100 } : { opacity: 1, y: 0 }) : { opacity: 0, y: -6 }}
+      animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed inset-x-0 top-0 z-20 ${solid ? 'bg-black' : 'bg-transparent'}`}
+      className={`fixed inset-x-0 top-0 z-50 bg-transparent transition-colors duration-500`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-10 py-5">
 
-        {/* LOGO */}
-        <Link href="/" className="text-white/90 font-semibold tracking-tight text-xl z-50">
-          ZenithCode
-        </Link>
+        {/* LOGO / TAGLINE AREA */}
+        <div className="relative z-50 h-6 flex items-center overflow-hidden w-[300px]">
+          {/* Tagline */}
+          <span
+            className={`absolute left-0 top-1/2 -translate-y-1/2 text-white/80 font-mono text-[10px] sm:text-xs tracking-widest uppercase transition-all duration-500 ${videoMode ? 'opacity-0 -translate-y-full' : 'opacity-100 translate-y-[-50%]'}`}
+          >
+            TURNING COMPLEXITY INTO CLARITY
+          </span>
+
+          {/* Logo (Appears on Scroll) */}
+          <Link
+            href="/"
+            className={`absolute left-0 top-1/2 -translate-y-1/2 text-white font-[family-name:var(--font-outfit)] font-bold text-xl tracking-tight transition-all duration-500 ${videoMode ? 'opacity-100 translate-y-[-50%]' : 'opacity-0 translate-y-full'}`}
+          >
+            ZENITH
+          </Link>
+        </div>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-12">
           {items.map((i) => (
             <Link
               key={i.label}
               href={i.href}
-              onClick={() => {
-                window.dispatchEvent(new Event('nav:loader'))
-              }}
-              className="text-white/70 hover:text-white transition-colors text-[16px]"
+              className="text-white/60 hover:text-white transition-colors text-[13px] font-mono tracking-widest uppercase"
             >
               {i.label}
             </Link>
@@ -97,7 +100,12 @@ export default function Navbar() {
 
         {/* ACTIONS & MOBILE TOGGLE */}
         <div className="flex items-center gap-3">
-          <Link href="#contact" onClick={() => window.dispatchEvent(new Event('nav:loader'))} className="hidden md:inline-flex rounded-full bg-white/10 px-4 py-2 text-[16px] text-white/90 backdrop-blur-sm hover:bg-white/20 transition-colors">Get in touch</Link>
+          <Link
+            href="/contact"
+            className="hidden md:inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 hover:text-white text-white/80 px-4 py-2 text-[12px] font-mono tracking-widest uppercase transition-all backdrop-blur-sm border border-white/10 rounded-sm"
+          >
+            CONTACT <span className="text-xs">↗</span>
+          </Link>
           <button
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -105,7 +113,6 @@ export default function Navbar() {
             className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/90 hover:bg-white/20 z-50 backdrop-blur-md"
           >
             <span className="sr-only">Menu</span>
-            {/* Hamburger / Close Icon Switch */}
             {open ? (
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M6 6l12 12M6 18L18 6" />
@@ -118,14 +125,10 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: solid && scrolled ? 1 : 0 }}
-        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-white/10"
-      />
+
+      {/* Mobile Menu */}
       {open && (
-        <motion.div className="md:hidden fixed inset-0 z-30 bg-black/80 backdrop-blur-sm" onClick={() => setOpen(false)}>
+        <motion.div className="md:hidden fixed inset-0 z-30 bg-black/95 backdrop-blur-xl" onClick={() => setOpen(false)}>
           <button
             aria-label="Close menu"
             onClick={() => setOpen(false)}
@@ -135,23 +138,19 @@ export default function Navbar() {
               <path d="M6 6l12 12M6 18L18 6" />
             </svg>
           </button>
-          <div className="mx-auto mt-20 w-full max-w-7xl px-6" onClick={(e) => e.stopPropagation()}>
-            <div className="flex flex-col items-start gap-6" role="dialog" aria-modal="true">
-              {items.map((i) => (
-                <Link
-                  key={i.label}
-                  href={i.href}
-                  onClick={() => {
-                    window.dispatchEvent(new Event('nav:loader'))
-                    setOpen(false)
-                  }}
-                  className="text-white/90 text-lg"
-                >
-                  {i.label}
-                </Link>
-              ))}
-              <Link href="#contact" onClick={() => { window.dispatchEvent(new Event('nav:loader')); setOpen(false) }} className="rounded-full bg-white/10 px-4 py-2 text-white/90">Get in touch</Link>
-            </div>
+          <div className="mx-auto mt-24 w-full px-6 flex flex-col gap-8">
+            {items.map((i) => (
+              <Link
+                key={i.label}
+                href={i.href}
+                className="text-white/90 text-2xl font-light tracking-wide border-b border-white/10 pb-4"
+              >
+                {i.label}
+              </Link>
+            ))}
+            <Link href="/contact" className="mt-4 inline-flex justify-center rounded-sm bg-white text-black px-6 py-3 font-mono text-sm uppercase tracking-widest">
+              Get in touch
+            </Link>
           </div>
         </motion.div>
       )}

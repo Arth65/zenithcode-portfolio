@@ -64,7 +64,7 @@ export default function WhatWeDo() {
           animate={{ opacity: reveal ? 0 : 1, scale: 1 }}
           whileHover={{ scale: 1.06 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className={"absolute bottom-6 right-6 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white/90 backdrop-blur-sm " + (reveal ? 'pointer-events-none' : '')}
+          className="absolute bottom-6 right-6 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white/90 backdrop-blur-sm"
           onMouseEnter={() => setReveal(true)}
           onMouseLeave={() => setReveal(false)}
           onFocus={() => setReveal(true)}

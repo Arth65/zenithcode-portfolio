@@ -21,7 +21,7 @@ export default function BackgroundVideo() {
 
   return (
     <motion.video
-      src="/hero_bg_video.mp4"
+      src="/landing_bg_video_1.mp4"
       autoPlay
       muted
       loop
