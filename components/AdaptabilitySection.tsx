@@ -29,6 +29,7 @@ export default function AdaptabilitySection() {
 
     return (
         <section
+            id="adaptability-section"
             ref={containerRef}
             className="relative z-50 w-full py-12 md:py-16 px-4 md:px-8 flex items-center"
             style={{ backgroundColor: '#F4F4EA' }}

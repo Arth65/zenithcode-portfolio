@@ -8,6 +8,8 @@ const CreativitySection = dynamic(() => import('../components/CreativitySection'
 const EnterpriseIntelligence = dynamic(() => import('../components/EnterpriseIntelligence'))
 const AdaptabilitySection = dynamic(() => import('../components/AdaptabilitySection'))
 const AgileManagement = dynamic(() => import('../components/AgileManagement'))
+const EngineerClaritySection = dynamic(() => import('../components/EngineerClaritySection'))
+const Footer = dynamic(() => import('../components/Footer'))
 
 export default function Home() {
   return (
@@ -20,6 +22,8 @@ export default function Home() {
       <EnterpriseIntelligence />
       <AdaptabilitySection />
       <AgileManagement />
+      <EngineerClaritySection />
+      <Footer />
     </div>
   )
 }

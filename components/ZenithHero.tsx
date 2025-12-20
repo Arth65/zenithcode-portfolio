@@ -139,9 +139,9 @@ export default function ZenithHero() {
                             </span>
                         </div>
                         <p className="text-2xl md:text-4xl lg:text-5xl font-light leading-tight max-w-4xl text-white">
-                            Because we think like <span className="text-white/60">innovators</span> — independent, fast, efficient, and always focused on the goal.
+                            Because we think like <span className="text-white/60">innovators</span> independent, fast, efficient, and always focused on the goal.
                             <br className="hidden md:block" />
-                            We work flexibly, think in networks, and deliver real results — <span className="italic font-serif">anytime, anywhere.</span>
+                            We work flexibly, think in networks, and deliver real results <span className="italic font-serif">anytime, anywhere.</span>
                         </p>
                     </div>
                 </div>
@@ -171,8 +171,8 @@ export default function ZenithHero() {
                     {/* Left: Intro Description */}
                     <div className="max-w-md hidden md:block">
                         <p className="text-sm md:text-base font-light text-white/90 leading-relaxed">
-                            Turn complex systems into smart, scalable solutions. <br />
-                            <span className="text-white/60">Perfect for businesses seeking clarity, agility, and real impact.</span>
+                            We design and build intelligent systems <br />
+                            <span className="text-white/60">that scale with your business and drive real outcomes.</span>
                         </p>
                     </div>
 

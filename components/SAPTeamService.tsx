@@ -11,15 +11,15 @@ interface AccordionItem {
 const accordionData: AccordionItem[] = [
     {
         title: 'ARCHITECTURE WITH IMPACT',
-        content: "We don't stop at delivering code. We design scalable architectures, solve complex integration challenges, and prepare your systems for tomorrow. With us, SAP becomes a backbone for growth instead of a roadblock."
+        content: "We design scalable, secure system architectures that grow with your business — from MVPs to enterprise platforms."
     },
     {
         title: 'SCALABLE EXPERTISE, ZERO FRICTION',
-        content: "Scale your SAP capabilities up or down without the overhead of permanent hires. Our flexible team model adapts to your project needs, delivering enterprise-grade expertise exactly when you need it."
+        content: "Access experienced engineers and automation specialists on demand — without long hiring cycles or operational overhead."
     },
     {
         title: 'BUSINESS-FIRST, NOT CODE-FIRST',
-        content: "We start with your business objectives, not technical constraints. Every solution we build is designed to drive measurable outcomes—whether that's faster processes, better data visibility, or reduced operational costs."
+        content: "We start with your business goals, then engineer solutions that deliver measurable outcomes — not just features."
     }
 ];
 
@@ -33,6 +33,7 @@ export default function SAPTeamService() {
 
     return (
         <section
+            id="sap-team-service"
             className="relative z-50 w-full py-16 md:py-24 px-4 md:px-8"
             style={{ backgroundColor: '#F4F4EA' }}
         >
@@ -42,21 +43,21 @@ export default function SAPTeamService() {
                     {/* Left: Title */}
                     <div>
                         <h2 className="text-6xl md:text-7xl lg:text-8xl font-light leading-tight text-black">
-                            SAP Team<br />
-                            as a Service
+                            Product &<br />
+                            Platform Engineering
                         </h2>
                     </div>
 
                     {/* Right: Description & CTA */}
                     <div className="flex flex-col justify-end items-end gap-6 text-right">
                         <p className="text-base md:text-lg text-black/70 leading-relaxed max-w-md">
-                            We connect SAP seamlessly across your enterprise – combining consulting expertise and integration.
+                            We design, build, and scale digital products — combining engineering excellence, automation, and cloud-first thinking.
                         </p>
                         <a
                             href="/contact"
                             className="inline-flex items-center gap-2 px-5 py-3 border border-black/80 text-sm font-medium tracking-wide uppercase text-black hover:bg-black hover:text-white transition-all duration-300 w-fit"
                         >
-                            START YOUR SAP PROJECT
+                            START YOUR PROJECT
                             <ArrowUpRight className="w-4 h-4" />
                         </a>
                     </div>

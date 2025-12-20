@@ -11,15 +11,15 @@ interface AccordionItem {
 const accordionData: AccordionItem[] = [
     {
         title: 'AI THAT INSPIRES, NOT REPLACES',
-        content: "Artificial Intelligence shouldn't just replace human effort—it should amplify it. We build AI solutions that empower your teams to achieve more, automating the mundane so your people can focus on the meaningful."
+        content: "We design AI systems that augment human capabilities — from chatbots to decision-support tools."
     },
     {
         title: 'INTELLIGENCE WITHOUT BORDERS',
-        content: "Data doesn't live in silos, and neither should your intelligence. We integrate AI across your entire ecosystem, breaking down barriers between departments and systems to create a truly connected, intelligent enterprise."
+        content: "Our AI solutions integrate seamlessly across tools, platforms, and cloud environments."
     },
     {
         title: 'FROM DATA TO DIRECTION',
-        content: "Raw data is noise; actionable insight is power. We transform your vast data landscapes into clear strategic direction, using advanced analytics to predict trends, optimize operations, and drive decisive action."
+        content: "Turn raw data into insights, predictions, and automated actions that drive real business impact."
     }
 ];
 
@@ -42,21 +42,21 @@ export default function EnterpriseIntelligence() {
                     {/* Left: Title */}
                     <div>
                         <h2 className="text-6xl md:text-7xl lg:text-8xl font-light leading-tight text-white">
-                            Enterprise<br />
-                            Intelligence
+                            AI &<br />
+                            Automation Solutions
                         </h2>
                     </div>
 
                     {/* Right: Description & CTA */}
                     <div className="flex flex-col justify-end items-end gap-6 text-right">
                         <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-md">
-                            We enable intelligent enterprises with AI – not just automate processes.
+                            We build AI-powered systems that automate workflows, enhance decision-making, and scale operations intelligently.
                         </p>
                         <a
                             href="/contact"
                             className="inline-flex items-center gap-2 px-5 py-3 border border-white/20 text-sm font-medium tracking-wide uppercase text-white hover:bg-white hover:text-black transition-all duration-300 w-fit"
                         >
-                            BRING INTELLIGENCE INTO ACTION
+                            AUTOMATE WITH AI
                             <ArrowUpRight className="w-4 h-4" />
                         </a>
                     </div>

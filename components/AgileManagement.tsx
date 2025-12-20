@@ -11,15 +11,15 @@ interface AccordionItem {
 const accordionData: AccordionItem[] = [
     {
         title: 'CATALYSTS FOR PROGRESS',
-        content: "We don't just manage projects—we accelerate them. Our agile approach removes blockers, streamlines decision-making, and keeps your teams focused on delivering value, not paperwork."
+        content: "We remove blockers, streamline workflows, and help teams move from idea to execution faster."
     },
     {
         title: 'ADAPTIVE FRAMEWORKS',
-        content: "No two projects are the same. We tailor agile methodologies—whether Scrum, Kanban, or hybrid—to fit your organization's culture, goals, and constraints for maximum effectiveness."
+        content: "Our delivery models adapt to your product, team, and growth stage — not the other way around."
     },
     {
         title: 'RADICAL TRANSPARENCY',
-        content: "Clear communication builds trust. We ensure stakeholders have real-time visibility into progress, risks, and decisions, keeping everyone aligned and empowered to act."
+        content: "Clear communication, real-time visibility, and shared ownership at every stage of delivery."
     }
 ];
 
@@ -33,6 +33,7 @@ export default function AgileManagement() {
 
     return (
         <section
+            id="agile-management"
             className="relative z-50 w-full py-16 md:py-24 px-4 md:px-8"
             style={{ backgroundColor: '#F4F4EA' }}
         >
@@ -42,21 +43,21 @@ export default function AgileManagement() {
                     {/* Left: Title */}
                     <div>
                         <h2 className="text-6xl md:text-7xl lg:text-8xl font-light leading-tight text-black">
-                            Agile<br />
-                            Management
+                            Delivery &<br />
+                            Growth Enablement
                         </h2>
                     </div>
 
                     {/* Right: Description & CTA */}
                     <div className="flex flex-col justify-end items-end gap-6 text-right">
                         <p className="text-base md:text-lg text-black/70 leading-relaxed max-w-md">
-                            We drive project success with agile leadership and with a clear focus on business value – not just manage tasks.
+                            We help teams ship faster, iterate smarter, and scale confidently with modern delivery practices.
                         </p>
                         <a
                             href="/contact"
                             className="inline-flex items-center gap-2 px-5 py-3 border border-black/80 text-sm font-medium tracking-wide uppercase text-black hover:bg-black hover:text-white transition-all duration-300 w-fit"
                         >
-                            SECURE AGILE LEADERSHIP
+                            ACCELERATE DELIVERY
                             <ArrowUpRight className="w-4 h-4" />
                         </a>
                     </div>
