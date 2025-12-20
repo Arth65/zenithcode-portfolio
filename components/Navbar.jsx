@@ -16,6 +16,7 @@ if (typeof window !== 'undefined') {
 const items = [
   { label: 'What We Do', href: '/what-we-do' },
   { label: 'About us', href: '/about-us' },
+  { label: 'Our Work', href: '/our-work' },
   { label: 'Our solution', href: '/our-solution' }
 ]
 
