@@ -47,10 +47,10 @@ export default function ShippingShowcaseSection() {
             <div className="relative z-10 h-full flex flex-col md:flex md:flex-row md:justify-end p-8 md:p-12 lg:p-16">
                 {/* Main heading */}
                 <div className="flex-1 flex flex-col justify-end md:justify-center md:items-start mb-12 md:mb-0 md:mr-auto">
-                    <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-thin text-white leading-tight tracking-tight text-center text-left">
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-thin text-white leading-tight tracking-tight text-left">
                         <div>
                             <span>We</span>{' '}
-                            <span style={{ fontFamily: 'Gemola' }}  className='italic'>Ship</span>{' '}
+                            <span style={{ fontFamily: 'Gemola' }} className='italic'>Ship</span>{' '}
                         </div>
                         {/* <span className='font-thin'>exceptional </span>{' '} */}
                         <span> Products that</span>{' '}
@@ -71,9 +71,8 @@ export default function ShippingShowcaseSection() {
                         <div className="relative bg-white rounded-full px-2 py-2 pr-6 flex items-center gap-3">
                             {/* Animated black background - starts as circle, expands to full width */}
                             <div
-                                className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black rounded-full transition-all duration-500 ease-out ${
-                                    isHovered ? 'w-[calc(100%-16px)]' : 'w-12'
-                                }`}
+                                className={`absolute left-2 top-1/2 -translate-y-1/2 bg-black rounded-full transition-all duration-500 ease-out ${isHovered ? 'w-[calc(100%-16px)]' : 'w-12'
+                                    }`}
                                 style={{ height: '48px' }}
                             />
 
@@ -97,9 +96,8 @@ export default function ShippingShowcaseSection() {
 
                             {/* Text */}
                             <span
-                                className={`relative z-10 text-sm font-semibold tracking-wide transition-colors duration-500 ${
-                                    isHovered ? 'text-white' : 'text-black'
-                                }`}
+                                className={`relative z-10 text-sm font-semibold tracking-wide transition-colors duration-500 ${isHovered ? 'text-white' : 'text-black'
+                                    }`}
                             >
                                 SEE WORK
                             </span>

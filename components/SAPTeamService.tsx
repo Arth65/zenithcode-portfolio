@@ -42,14 +42,14 @@ export default function SAPTeamService() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-16">
                     {/* Left: Title */}
                     <div>
-                        <h2 className="text-6xl md:text-7xl lg:text-8xl font-light leading-tight text-black">
+                        <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light leading-tight text-black">
                             Product &<br />
                             Platform Engineering
                         </h2>
                     </div>
 
                     {/* Right: Description & CTA */}
-                    <div className="flex flex-col justify-end items-end gap-6 text-right">
+                    <div className="flex flex-col justify-end items-start md:items-end gap-6 text-left md:text-right">
                         <p className="text-base md:text-lg text-black/70 leading-relaxed max-w-md">
                             We design, build, and scale digital products - combining engineering excellence, automation, and cloud-first thinking.
                         </p>
@@ -83,7 +83,7 @@ export default function SAPTeamService() {
                                 <div className="flex items-center gap-6">
                                     <span className={`w-3 h-3 rounded-full transition-colors duration-300 ${hoveredIndex === index ? 'bg-black' : 'bg-[#DBD40F]'
                                         }`} />
-                                    <span className="text-xl md:text-3xl font-light tracking-wide uppercase text-black">
+                                    <span className="text-lg sm:text-xl md:text-3xl font-light tracking-wide uppercase text-black">
                                         {item.title}
                                     </span>
                                 </div>

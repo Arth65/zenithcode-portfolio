@@ -26,10 +26,34 @@ export default function ProjectShowcaseSection({ project }: ProjectShowcaseSecti
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
 
-    // Determine dimensions based on aspect ratio
+    // Determine dimensions based on aspect ratio - responsive values
     const isDesktop = project.aspectRatio === ImageAspectRatio.DESKTOP;
-    const imageWidth = isDesktop ? 640 : 360;
-    const imageHeight = isDesktop ? 360 : 640;
+    // Mobile: smaller dimensions, Desktop: larger
+    const getImageDimensions = () => {
+        if (typeof window !== 'undefined' && window.innerWidth < 640) {
+            // Mobile
+            return isDesktop ? { width: 280, height: 158 } : { width: 240, height: 426 };
+        } else if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+            // Tablet
+            return isDesktop ? { width: 400, height: 225 } : { width: 300, height: 533 };
+        }
+        // Desktop
+        return isDesktop ? { width: 640, height: 360 } : { width: 360, height: 640 };
+    };
+
+    const [dimensions, setDimensions] = useState(isDesktop ? { width: 640, height: 360 } : { width: 360, height: 640 });
+
+    useEffect(() => {
+        const updateDimensions = () => {
+            setDimensions(getImageDimensions());
+        };
+        updateDimensions();
+        window.addEventListener('resize', updateDimensions);
+        return () => window.removeEventListener('resize', updateDimensions);
+    }, [isDesktop]);
+
+    const imageWidth = dimensions.width;
+    const imageHeight = dimensions.height;
 
 
     useEffect(() => {
@@ -84,7 +108,7 @@ export default function ProjectShowcaseSection({ project }: ProjectShowcaseSecti
                 </p>
 
                 {/* Project Name - Large, Flowing Typography */}
-                <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-6xl font-light mb-4 text-white leading-tight tracking-tight max-w-5xl">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-light mb-4 text-white leading-tight tracking-tight max-w-5xl">
                     {project.name}
                 </h2>
 

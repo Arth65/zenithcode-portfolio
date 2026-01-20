@@ -166,8 +166,8 @@ export default function ZenithHero() {
                 {/* Bottom Content Area */}
                 <div
                     ref={bottomContentRef}
-                    className="absolute bottom-8 md:bottom-12 w-full px-6 md:px-12 flex flex-col md:flex-row justify-between items-end z-20 gap-8 md:gap-0"
-                >
+                    className="absolute bottom-8 md:bottom-12 w-full px-6 md:px-12 flex flex-row justify-between items-end z-20">
+
                     {/* Left: Intro Description */}
                     <div className="max-w-md hidden md:block">
                         <p className="text-sm md:text-base font-light text-white/90 leading-relaxed">
@@ -176,8 +176,8 @@ export default function ZenithHero() {
                         </p>
                     </div>
 
-                    {/* Center: Scroll Button */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 md:bottom-2">
+                    {/* Center/Left: Scroll Button */}
+                    <div className="flex items-end md:absolute md:left-1/2 md:transform md:-translate-x-1/2 md:bottom-2">
                         <button
                             onClick={() => {
                                 // Scroll down to trigger the lift animation
