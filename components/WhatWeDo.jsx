@@ -197,27 +197,31 @@ function ImpactSection() {
 }
 
 function Avatars({ count = 5, more = '', images = [] }) {
-  // Use provided images or fallback to random Unsplash images
+  // Use provided images or fallback to default tech icons
   const avatarImages = images.length > 0 ? images : [
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'
+    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+    'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'
   ]
 
   const displayImages = avatarImages.slice(0, count)
 
   return (
     <div className="mt-8 flex items-center">
-      <div className="flex -space-x-3">
+      <div className="flex -space-x-2">
         {displayImages.map((img, i) => (
-          <img
+          <div
             key={i}
-            src={img}
-            alt=""
-            className="inline-block h-10 w-10 rounded-full ring-2 ring-black object-cover"
-          />
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 ring-2 ring-black p-2"
+          >
+            <img
+              src={img}
+              alt=""
+              className="h-full w-full object-contain"
+            />
+          </div>
         ))}
       </div>
       {more && <span className="ml-4 text-white/50 text-sm font-light">{more}</span>}
@@ -236,7 +240,13 @@ function ExpertiseSection() {
       ],
       more: '+3',
       avatarCount: 4,
-      offset: 'lg:mt-20' // Most offset - at bottom
+      offset: 'lg:mt-20', // Most offset - at bottom
+      images: [
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/confluence/confluence-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg'
+      ]
     },
     {
       title: 'DESIGN & EXPERIENCE',
@@ -247,7 +257,14 @@ function ExpertiseSection() {
       ],
       more: '+6',
       avatarCount: 5,
-      offset: 'lg:mt-10' // Middle offset
+      offset: 'lg:mt-10', // Middle offset
+      images: [
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketch/sketch-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg'
+      ]
     },
     {
       title: 'ENGINEERING & AUTOMATION',
@@ -259,7 +276,14 @@ function ExpertiseSection() {
       ],
       more: '+12',
       avatarCount: 5,
-      offset: 'lg:mt-0' // No offset - at top
+      offset: 'lg:mt-0', // No offset - at top
+      images: [
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg'
+      ]
     }
   ]
 
@@ -338,7 +362,7 @@ function ExpertiseSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: colIndex * 0.15 + 0.6 }}
                 >
-                  <Avatars count={c.avatarCount} more={c.more} />
+                  <Avatars count={c.avatarCount} more={c.more} images={c.images} />
                 </motion.div>
               </div>
             </motion.div>
@@ -352,58 +376,58 @@ function ExpertiseSection() {
 function PartnershipsSection() {
   const partnerItems = [
     {
-      image: '/what_to_do_testimonial_1.jpg',
-      title: 'TechFlow Inc.',
-      subtitle: 'AI-Powered Analytics',
+      image: '/what_we_do_impact_1.jpg',
+      title: 'System Architecture',
+      subtitle: 'Scalable Foundations',
       borderColor: '#3B82F6',
       gradient: 'linear-gradient(145deg, #3B82F6, #000)',
-      objectPosition: '50% 35%', // Shifted down to show face
-      description: "ZenithCode became an extension of our engineering team almost instantly. Their focus, clarity, and execution speed helped us launch a platform we had delayed for months."
+      objectPosition: '50% 35%',
+      description: "We design robust system architectures that grow with your business, secure, modular, and built for long-term scalability."
     },
     {
-      image: '/what_to_do_testimonial_2.jpg',
-      title: 'Nexus Systems',
-      subtitle: 'Cloud Infrastructure',
+      image: '/what_we_do_impact_2.jpg',
+      title: 'Cloud & Infrastructure',
+      subtitle: 'Reliable by Design',
       borderColor: '#10B981',
       gradient: 'linear-gradient(180deg, #10B981, #000)',
-      objectPosition: 'bottom', // Focus on subject at bottom
-      description: "What impressed us most wasn’t just the technical depth, but the way ZenithCode translated ideas into elegant, scalable systems. Every delivery was thoughtful and pushed our product forward."
+      objectPosition: 'bottom',
+      description: "From deployment to monitoring, we build cloud infrastructure that is fast, resilient, and cost-efficient."
     },
     {
-      image: '/what_to_do_testimonial_3.jpg',
-      title: 'Vertex Labs',
-      subtitle: 'Machine Learning',
+      image: '/what_we_do_impact_3.jpg',
+      title: 'AI & Automation',
+      subtitle: 'Intelligence in Action',
       borderColor: '#F59E0B',
       gradient: 'linear-gradient(165deg, #F59E0B, #000)',
       objectPosition: 'top',
-      description: "We approached ZenithCode with a chaotic vision and left with a product that feels intentional, fast, and beautifully engineered. Their mix of design intuition and backend rigor is rare to find today."
+      description: "We integrate AI and automation to streamline workflows, reduce manual effort, and unlock smarter decision-making."
     },
     {
-      image: '/what_to_do_testimonial_4.jpg',
-      title: 'Quantum Digital',
-      subtitle: 'Digital Transformation',
+      image: '/what_we_do_impact_4.jpg',
+      title: 'Product Engineering',
+      subtitle: 'Built for Users',
       borderColor: '#EF4444',
       gradient: 'linear-gradient(195deg, #EF4444, #000)',
       objectPosition: 'top',
-      description: "ZenithCode streamlined workflows we thought were impossible to automate. The impact on productivity was immediate—our team now saves hours every single day."
+      description: "We craft high-performance web and app experiences with clean code, intuitive UI, and measurable business impact."
     },
     {
-      image: '/what_to_do_testimonial_5.jpg',
-      title: 'Nova Enterprises',
-      subtitle: 'Enterprise Solutions',
+      image: '/what_we_do_impact_5.jpg',
+      title: 'Data & Analytics',
+      subtitle: 'Insights That Matter',
       borderColor: '#8B5CF6',
       gradient: 'linear-gradient(225deg, #8B5CF6, #000)',
       objectPosition: 'top',
-      description: "The commitment ZenithCode brings to each project is outstanding. They obsess over details, communicate clearly, and never compromise on quality. It felt like working with a deeply invested internal team."
+      description: "We transform raw data into clear dashboards and insights that help teams act faster and smarter."
     },
     {
-      image: '/what_to_do_testimonial_6.jpg',
-      title: 'Horizon Tech',
-      subtitle: 'Innovation Partners',
+      image: '/what_we_do_impact_6.jpg',
+      title: 'Integration & APIs',
+      subtitle: 'Everything Connected',
       borderColor: '#06B6D4',
       gradient: 'linear-gradient(135deg, #06B6D4, #000)',
       objectPosition: '50% 0%',
-      description: "Working with ZenithCode elevated our product experience. They understand design at a conceptual level and engineer interactions that feel alive. Their craftsmanship is something we truly admire."
+      description: "We connect tools, platforms, and services into one seamless ecosystem, eliminating friction across systems."
     }
   ]
 
@@ -417,7 +441,7 @@ function PartnershipsSection() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-white/95 font-extralight tracking-tight text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] text-center mb-16 font-[family-name:var(--font-outfit)]"
         >
-          Partnerships we're proud of
+          How We Create Impact
         </motion.h2>
 
         <motion.div

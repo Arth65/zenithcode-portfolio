@@ -61,7 +61,12 @@ export default function Contact() {
         setErrorMessage('')
 
         try {
-            await emailjs.sendForm('service_vz9nym1', 'template_sveewwf', formRef.current!, 'HZjX1X4a2zn3NSMMa')
+            await emailjs.sendForm(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+                formRef.current!,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+            )
 
             setStatus('success')
             setFormData({ name: '', email: '', company: '', service: '', budget: '', message: '' })
@@ -85,7 +90,7 @@ export default function Contact() {
 
             <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
-                {/* LEFT SIDE — Visual Section */}
+                {/* LEFT SIDE - Visual Section */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
@@ -114,7 +119,7 @@ export default function Contact() {
                 </motion.div>
 
 
-                {/* RIGHT SIDE — Form Section */}
+                {/* RIGHT SIDE - Form Section */}
                 <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}

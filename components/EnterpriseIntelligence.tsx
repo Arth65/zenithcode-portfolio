@@ -11,7 +11,7 @@ interface AccordionItem {
 const accordionData: AccordionItem[] = [
     {
         title: 'AI THAT INSPIRES, NOT REPLACES',
-        content: "We design AI systems that augment human capabilities — from chatbots to decision-support tools."
+        content: "We design AI systems that augment human capabilities - from chatbots to decision-support tools."
     },
     {
         title: 'INTELLIGENCE WITHOUT BORDERS',

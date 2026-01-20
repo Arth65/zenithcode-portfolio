@@ -51,7 +51,7 @@ export default function EngineerClaritySection() {
                     ref={textRef}
                     className="text-4xl md:text-5xl lg:text-7xl font-light leading-tight tracking-tight text-white"
                 >
-                    We engineer clarity —<br className="hidden md:block" />
+                    We engineer clarity -<br className="hidden md:block" />
                     driven by strategy,<br className="hidden md:block" />
                     powered by technology.
                 </h2>

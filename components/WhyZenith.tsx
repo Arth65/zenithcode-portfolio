@@ -56,9 +56,9 @@ export default function WhyZenith() {
                     ref={textRef}
                     className="text-2xl md:text-4xl lg:text-5xl font-light leading-tight opacity-0"
                 >
-                    Because we think like <span className="text-white/60">innovators</span> — independent, fast, efficient, and always focused on the goal.
+                    Because we think like <span className="text-white/60">innovators</span> - independent, fast, efficient, and always focused on the goal.
                     <br className="hidden md:block" />
-                    We work flexibly, think in networks, and deliver real results — <span className="italic font-serif">anytime, anywhere.</span>
+                    We work flexibly, think in networks, and deliver real results - <span className="italic font-serif">anytime, anywhere.</span>
                 </p>
             </div>
         </section>

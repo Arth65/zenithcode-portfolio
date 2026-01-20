@@ -71,14 +71,13 @@ function FlowingMenuItem({ link, text, image }) {
 
     return (
         <div className="flowing-menu__item" ref={itemRef}>
-            <a
+            <div
                 className="flowing-menu__item-link"
-                href={link}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
                 {text}
-            </a>
+            </div>
             <div className="flowing-marquee" ref={marqueeRef}>
                 <div className="flowing-marquee__inner-wrap" ref={marqueeInnerRef}>
                     <div className="flowing-marquee__inner" aria-hidden="true">

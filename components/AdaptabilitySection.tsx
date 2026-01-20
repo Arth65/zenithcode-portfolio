@@ -51,7 +51,7 @@ export default function AdaptabilitySection() {
                         ref={textRef}
                         className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed tracking-tight text-black"
                     >
-                        We are used to <span className="inline-block bg-[#DBD40F] px-1.5 mx-0.5 rounded-sm font-normal">constantly adapting</span> to new environments, cultures, people, and conditions. This flexibility is a major asset — especially in agile projects and fast-changing contexts.
+                        We are used to <span className="inline-block bg-[#DBD40F] px-1.5 mx-0.5 rounded-sm font-normal">constantly adapting</span> to new environments, cultures, people, and conditions. This flexibility is a major asset - especially in agile projects and fast-changing contexts.
                     </p>
                 </div>
 

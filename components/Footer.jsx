@@ -5,7 +5,7 @@ import { Linkedin, Youtube, Instagram, Twitter } from 'lucide-react';
 
 export default function Footer() {
     return (
-        <footer className="relative w-full h-[60vh] md:h-[80vh] bg-[#050505] text-white overflow-hidden flex flex-col justify-between px-6 py-8 md:px-12 md:py-12">
+        <footer className="relative w-full h-[50vh] md:h-[65vh] bg-[#050505] text-white overflow-hidden flex flex-col justify-between px-6 py-6 md:px-12 md:py-10">
 
             {/* Top Section: Email & Socials (Right Aligned) */}
             <div className="flex flex-col items-end w-full">

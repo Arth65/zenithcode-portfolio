@@ -15,7 +15,7 @@ const accordionData: AccordionItem[] = [
     },
     {
         title: 'ADAPTIVE FRAMEWORKS',
-        content: "Our delivery models adapt to your product, team, and growth stage — not the other way around."
+        content: "Our delivery models adapt to your product, team, and growth stage - not the other way around."
     },
     {
         title: 'RADICAL TRANSPARENCY',

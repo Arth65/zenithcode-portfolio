@@ -11,15 +11,15 @@ interface AccordionItem {
 const accordionData: AccordionItem[] = [
     {
         title: 'ARCHITECTURE WITH IMPACT',
-        content: "We design scalable, secure system architectures that grow with your business — from MVPs to enterprise platforms."
+        content: "We design scalable, secure system architectures that grow with your business - from MVPs to enterprise platforms."
     },
     {
         title: 'SCALABLE EXPERTISE, ZERO FRICTION',
-        content: "Access experienced engineers and automation specialists on demand — without long hiring cycles or operational overhead."
+        content: "Access experienced engineers and automation specialists on demand - without long hiring cycles or operational overhead."
     },
     {
         title: 'BUSINESS-FIRST, NOT CODE-FIRST',
-        content: "We start with your business goals, then engineer solutions that deliver measurable outcomes — not just features."
+        content: "We start with your business goals, then engineer solutions that deliver measurable outcomes - not just features."
     }
 ];
 
@@ -51,7 +51,7 @@ export default function SAPTeamService() {
                     {/* Right: Description & CTA */}
                     <div className="flex flex-col justify-end items-end gap-6 text-right">
                         <p className="text-base md:text-lg text-black/70 leading-relaxed max-w-md">
-                            We design, build, and scale digital products — combining engineering excellence, automation, and cloud-first thinking.
+                            We design, build, and scale digital products - combining engineering excellence, automation, and cloud-first thinking.
                         </p>
                         <a
                             href="/contact"

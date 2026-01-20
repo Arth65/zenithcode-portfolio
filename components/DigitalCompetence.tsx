@@ -52,7 +52,7 @@ export default function DigitalCompetence() {
                         className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed tracking-tight text-black"
                     >
                         At Zenith, we build teams that are <span className="inline-block bg-[#DBD40F] px-1.5 mx-0.5 rounded-sm font-normal">engineering-first</span>,
-                        deeply analytical, and fluent in modern technologies — enabling businesses to move faster, scale smarter, and turn complex challenges into reliable digital systems.
+                        deeply analytical, and fluent in modern technologies - enabling businesses to move faster, scale smarter, and turn complex challenges into reliable digital systems.
                     </p>
                 </div>
 
