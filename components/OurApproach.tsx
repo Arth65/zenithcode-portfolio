@@ -112,7 +112,8 @@ export default function OurApproach() {
 
 
         // === 2. PHASE 1: HERO -> TIMELINE LOCK ===
-        if (mainOrbContainerRef.current && heroRef.current) {
+        // Only animate orb on desktop (when it's rendered)
+        if (!isMobileView && mainOrbContainerRef.current && heroRef.current) {
             const orbTimeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
@@ -123,31 +124,22 @@ export default function OurApproach() {
                 }
             });
 
-            if (isMobileView) {
-                // MOBILE ANIMATION
-                orbTimeline.to(mainOrbContainerRef.current, {
-                    left: '80px',
-                    top: `calc(${ANCHOR_POINT} - 100px)`,
-                    scale: TIMELINE_SCALE_MOBILE,
-                    ease: "power2.inOut",
-                });
-            } else {
-                // DESKTOP ANIMATION
-                orbTimeline.to(mainOrbContainerRef.current, {
-                    // FIX: This ensures it animates TO the center (50%)
-                    left: 'calc(50% - 295px)',
-                    top: `calc(${ANCHOR_POINT} - 300px)`,
-                    scale: TIMELINE_SCALE_DESKTOP,
-                    ease: "power2.inOut",
-                });
-            }
+            // DESKTOP ANIMATION ONLY
+            orbTimeline.to(mainOrbContainerRef.current, {
+                // FIX: This ensures it animates TO the center (50%)
+                left: 'calc(50% - 295px)',
+                top: `calc(${ANCHOR_POINT} - 300px)`,
+                scale: TIMELINE_SCALE_DESKTOP,
+                ease: "power2.inOut",
+            });
         }
 
         // === 3. PHASE 2: TIMELINE END -> EXPLOSION ===
-        if (mainOrbContainerRef.current && trackRef.current) {
+        // Only animate orb on desktop (when it's rendered)
+        if (!isMobileView && mainOrbContainerRef.current && trackRef.current) {
             gsap.fromTo(mainOrbContainerRef.current,
                 {
-                    scale: isMobileView ? TIMELINE_SCALE_MOBILE : TIMELINE_SCALE_DESKTOP,
+                    scale: TIMELINE_SCALE_DESKTOP,
                     opacity: 1,
                     filter: "blur(0px)",
                     y: 0,
@@ -253,39 +245,41 @@ export default function OurApproach() {
         <div ref={containerRef} className="relative w-full bg-black text-white overflow-x-hidden">
 
             {/* === FIXED CANVAS FOR 3D ORB === */}
-            <div
-                ref={mainOrbContainerRef}
-                className="fixed z-40 pointer-events-none"
-                style={{
-                    width: isMobile ? '200px' : '600px',
-                    height: isMobile ? '200px' : '600px',
-                    top: isMobile ? 'calc(50vh - 100px)' : 'calc(50vh - 300px)',
-                    // FIX: Initial position back to the right side (75%)
-                    left: isMobile ? 'calc(50% - 100px)' : 'calc(75% - 300px)',
-                    transform: `scale(${isMobile ? 0.6 : 1.2})`
-                }}
-            >
-                <div className="absolute -inset-10 rounded-full bg-emerald-500/10 blur-[60px] animate-pulse" />
-                <div className="absolute -inset-4 rounded-full bg-cyan-500/15 blur-[40px] animate-pulse" style={{ animationDelay: '0.5s' }} />
+            {!isMobile && (
+                <div
+                    ref={mainOrbContainerRef}
+                    className="fixed z-40 pointer-events-none"
+                    style={{
+                        width: '600px',
+                        height: '600px',
+                        top: 'calc(50vh - 300px)',
+                        // FIX: Initial position back to the right side (75%)
+                        left: 'calc(75% - 300px)',
+                        transform: 'scale(1.2)'
+                    }}
+                >
+                    <div className="absolute -inset-10 rounded-full bg-emerald-500/10 blur-[60px] animate-pulse" />
+                    <div className="absolute -inset-4 rounded-full bg-cyan-500/15 blur-[40px] animate-pulse" style={{ animationDelay: '0.5s' }} />
 
-                <div className="relative w-full h-full rounded-full overflow-hidden cursor-grab active:cursor-grabbing pointer-events-auto">
-                    {!splineLoaded && (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-16 h-16 rounded-full border-2 border-emerald-500/20 border-t-emerald-500 animate-spin" />
-                        </div>
-                    )}
+                    <div className="relative w-full h-full rounded-full overflow-hidden cursor-grab active:cursor-grabbing pointer-events-auto">
+                        {!splineLoaded && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-16 h-16 rounded-full border-2 border-emerald-500/20 border-t-emerald-500 animate-spin" />
+                            </div>
+                        )}
 
-                    <div className="relative w-full h-full" style={{ filter: 'drop-shadow(0 0 20px rgba(16, 185, 129, 0.4))' }}>
-                        <div className="w-full h-full scale-125 origin-center">
-                            <Spline
-                                scene="https://prod.spline.design/XSwNW8D1nX3OM3Mc/scene.splinecode"
-                                onLoad={() => setSplineLoaded(true)}
-                                className={`w-full h-full transition-opacity duration-1000 ${splineLoaded ? 'opacity-100' : 'opacity-0'}`}
-                            />
+                        <div className="relative w-full h-full" style={{ filter: 'drop-shadow(0 0 20px rgba(16, 185, 129, 0.4))' }}>
+                            <div className="w-full h-full scale-125 origin-center">
+                                <Spline
+                                    scene="https://prod.spline.design/XSwNW8D1nX3OM3Mc/scene.splinecode"
+                                    onLoad={() => setSplineLoaded(true)}
+                                    className={`w-full h-full transition-opacity duration-1000 ${splineLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
 
             {/* === 1. HERO SECTION (ZENITH STANDARD) === */}
             <section ref={heroRef} className="relative min-h-screen flex items-center pt-20 pb-20 overflow-hidden z-10">
